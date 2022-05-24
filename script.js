@@ -40,19 +40,15 @@ async function findAllPaletas() {
 findAllPaletas();
 
 const findPaletaById = async () => {
-  const inputElement = document.getElementById('idPaleta').value;
-
-  const paletaEscolhida = paletas.filter(
-    (paleta) => paleta.sabor === inputElement
-  ); 
-  const id = paletaEscolhida[0]._id;
+  const id = document.getElementById("idPaleta").value;
 
   const response = await fetch(`${baseUrl}/find-paleta/${id}`);
   const paleta = await response.json();
 
+  console.log("paleta", paleta);
   let isEdit = true;
 
-  const paletaEscolhidaDiv = document.getElementById('paletaEscolhida');
+  const paletaEscolhidaDiv = document.getElementById("paletaEscolhida");
 
   paletaEscolhidaDiv.innerHTML = `
     <div class="PaletaListaItem" id="PaletaListaItem_${paleta._id}"><div>
@@ -66,7 +62,7 @@ const findPaletaById = async () => {
           } onclick="abrirModal(${isEdit})"></i>
           <button class="Acoes__deletar" id=${
             paleta._id
-          } onclick="deletePaleta()">deletar</button>
+          } onclick="deletePaleta()"><i class="fa-solid fa-trash"></i></button>
         </div>
 
       </div>
